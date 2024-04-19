@@ -1,0 +1,47 @@
+test.component.ts
+
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-test',
+  templateUrl: './test.component.html',
+  styleUrls: ['./test.component.css']
+})
+export class TestComponent implements OnInit {
+  age:number=45;
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+
+
+test.component.html
+
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-test',
+  templateUrl: './test.component.html',
+  styleUrls: ['./test.component.css']
+})
+export class TestComponent implements OnInit {
+  age:number=45;
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+
+app.component.html
+
+<app-test></app-test>
+
+
+

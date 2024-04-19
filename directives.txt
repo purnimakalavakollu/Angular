@@ -1,0 +1,51 @@
+app.component.html
+-------------------
+
+<p>Input something in the input box:</p>
+<p>Name: <input type="text" [(ngModel)]="firstName"></p>
+<p>You wrote: {{ firstName }}</p>
+
+
+
+app.component.ts
+----------------
+
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  firstName = 'John';
+}
+
+
+app.module.ts
+-------------
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'; // Import this
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import {FormControl,ReactiveFormsModule} from '@angular/forms';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule 
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+
