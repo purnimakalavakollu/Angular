@@ -1,0 +1,70 @@
+app.component.ts
+
+
+import { Component } from '@angular/core';
+import {state, style, transition,animate,trigger} from '@angular/animations';
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+  animations:[
+    trigger('enlarge',[
+      state('start',style({
+        height:'150px'
+ }) ),
+      state('end',style({
+        height:'250px'
+      })),
+
+      transition('start=>end',[
+       animate('1s 2s') 
+    ]),
+      
+      transition('end=>start',[
+        animate('1s 2s') 
+       ])
+      ])
+    ]
+  })
+       export class AppComponent {
+  title = 'animate-app';
+  isEnlarge:boolean=false;
+  buttonText:string="Enlarge";
+
+  triggerAnimation(){
+    this.isEnlarge=!this.isEnlarge;
+    if(this.isEnlarge)
+      this.buttonText="shrink";
+    else
+    this.buttonText="Enlarge";
+  }
+  }
+  
+
+app.module.ts
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+   BrowserAnimationsModule
+
+
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+app.component.html
+<h1>{{title}}</h1>
+<img [@enlarge]="isEnlarge?'end':'start'" src="assets/01.jpg" style="height:200px" alt="no"/>
+<br/>
+<button (click)='triggerAnimation()'>{{this.buttonText}}</button>
