@@ -1,0 +1,45 @@
+
+C:\>md demo
+C:\>cd demo
+C:\demo>ng new databind-app
+C:\demo>cd databind-app
+C:\demo\>databind-app>ng generate component ngif-else-example
+C:\demo\>databind-app>code .
+--------------------------------------------------------------------------------------------
+ngif-else-example.component.html 
+
+<div *ngIf="isLogged; else notLoggedIn">
+  <p>Welcome, user!</p>
+</div>
+
+<ng-template #notLoggedIn>
+  <p>Please log in to access the content.</p>
+</ng-template>
+
+<button (click)="toggleLogin()">Toggle Login</button>
+
+---------------------------------------------------------------------------------------------
+ngif-else-example.component.ts 
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-ngif-else-example',
+  templateUrl: './ngif-else-example.component.html',
+  styleUrls: ['./ngif-else-example.component.css']
+})
+export class NgifElseExampleComponent {
+  isLogged: boolean = false;
+
+  toggleLogin() {
+    this.isLogged = !this.isLogged;
+  }
+}
+
+--------------------------------------------------------------------------------------------
+app.component.html
+
+<app-ngif-else-example></app-ngif-else-example>
+---------------------------------------------------------------------------------------------
+npm install querystring
+ng serve
