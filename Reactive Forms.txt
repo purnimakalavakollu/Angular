@@ -1,0 +1,72 @@
+app.module.ts
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { TestComponent } from './test/test.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    TestComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+
+test.component.ts
+
+
+import { Component, OnInit } from '@angular/core';
+import { FormGroup,FormControl } from '@angular/forms';
+
+@Component({
+  selector: 'app-test',
+  templateUrl: './test.component.html',
+  styleUrls: ['./test.component.css']
+})
+export class TestComponent implements OnInit {
+
+  constructor() { }
+  userName;
+  formdata;
+  ngOnInit() {
+    this.formdata=new FormGroup({
+      userName:new FormControl("Karimullah")
+    });
+  
+  }
+  onClickSubmit(data){this.userName=data.userName;}
+
+}
+
+
+test.component.html
+
+
+<div>
+    <form [formGroup]="formdata"(ngSubmit)="onClickSubmit(formdata.value)">
+        <input type="text" name="userName" placeholder="userName" formControlName="userName">
+        <br/>
+        <br/>
+        <input type="submit" value="click here">
+    </form>
+</div>
+<p>Textbox result is :{{userName}}</p>
+
+
+app.component.html
+
+
+<app-test></app-test>

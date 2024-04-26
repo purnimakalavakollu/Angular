@@ -1,0 +1,85 @@
+app.module.ts
+
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { TestComponent } from './test/test.component';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    TestComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+test.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+@Component({
+  selector: 'app-test',
+  templateUrl: './test.component.html',
+  styleUrls: ['./test.component.css']
+})
+export class TestComponent implements OnInit {
+  requiredForm : FormGroup;
+  constructor(private fb : FormBuilder)
+  {
+    this.myForm();
+  }
+  userName;
+  formdata;
+  myForm(){
+    this.requiredForm=this.fb.group({
+name:[,Validators.required] 
+   });
+  }
+  ngOnInit() {
+    this.formdata=new FormGroup({
+      userName:new FormControl("tutorial")
+  })
+}
+  onClickSubmit(data) {this.userName=this.userName}
+
+}
+
+test.component.html
+
+<div>
+    <h2>Field Validation</h2>
+    <form [formGroup]="requiredForm" novalidate>
+        <div class="form-group">
+            <label class ="center-block">Name:
+                <input class="form-control" formControlName="name">
+            </label>
+        </div>
+        <div *ngIf="requiredForm.controls['name'].invalid&& requiredForm.controls['name'].touched" class=" alert alert-danger">
+            <div *ngIf="requiredForm.controls['name'].errors.required">
+                Name is required
+            </div>
+        </div>
+    </form>
+    <p>Form value:{{requiredForm.value | json}} </p> 
+    <p>Form status:{{requiredForm.status | json}} </p>
+</div>
+
+
+app.component.html
+
+<app-test></app-test>
