@@ -1,0 +1,53 @@
+app.module.ts
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import {LOCALE_ID} from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [{provide:LOCALE_ID,useValue:'te'}],
+
+  bootstrap: [AppComponent]
+
+})
+export class AppModule { }
+
+app.component.ts
+import { Component } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import  LocaleTe from '@angular/common/locales/te';
+registerLocaleData (LocaleTe);
+
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'il8n-sample';
+  currentDate:number=Date.now();
+}
+
+app.component.html
+
+<h1>{{title}}</h1>
+<div>Hello</div>
+<div>The current time is{{currentDate | date:'medium'}}</div>
+
+
+<h1>{{title}}</h1>
+<div>Hello</div>
+<div>The current time is{{currentDate | date:'medium'}}</div>
+
+
+
